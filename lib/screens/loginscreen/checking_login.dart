@@ -22,7 +22,7 @@ class CheckingLogin extends StatelessWidget {
                 child: Text("Error Occured"),
               );
             } else if (snapshot.data != null || snapshot.data!.uid != null) {
-              return const HomeScreen();
+              return HomeScreen();
             } else {
               return SingleChildScrollView(
                 child: Signinpage(),

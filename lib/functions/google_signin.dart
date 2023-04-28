@@ -16,7 +16,7 @@ void signinwithgoogle() async {
 
     // ignore: unnecessary_null_comparison
     if (userCredential != null) {
-      Get.offAll(() => const HomeScreen(),
+      Get.offAll(() => HomeScreen(),
           transition: Transition.circularReveal,
           duration: const Duration(seconds: 1));
     }

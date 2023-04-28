@@ -16,7 +16,7 @@ class ForgotPassword extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Forgot password",
           ),
           centerTitle: true,
@@ -28,7 +28,7 @@ class ForgotPassword extends StatelessWidget {
               child: Image.asset('lib/asset/forget-password-animation.gif'),
             ),
             kheight30,
-            Text(
+            const Text(
               "Enter the email associated with\nyour account and we'll send an\nemail with instructions to reset\nyour password",
             ),
             kheight30,
