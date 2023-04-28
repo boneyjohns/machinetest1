@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:machine_test1/screens/Login_Page.dart';
+import 'package:get/get.dart';
+import 'package:machine_test1/screens/loginscreen/checking_login.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,11 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Loginpage(),
+      home: const CheckingLogin(),
     );
   }
 }
