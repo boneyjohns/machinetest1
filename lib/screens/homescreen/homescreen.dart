@@ -1,9 +1,13 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:machine_test1/functions/select_file.dart';
 import 'package:machine_test1/screens/loginscreen/checking_login.dart';
+import 'package:machine_test1/screens/view_pdf.dart/pdfviewer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,14 +31,33 @@ class HomeScreen extends StatelessWidget {
           ]),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          // if (pickedfile != null)
-          //   Expanded(
-          //       child: Container(
-          //     height: 200,
-          //     width: 300,
-          //     color: Colors.blue,
-          //     child: Center(child: Text(pickedfile!.name)),
-          //   )),,
+          StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('resume').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          QueryDocumentSnapshot documentsnampshot =
+                              snapshot.data!.docs[index];
+
+                          return ListTile(
+                            onTap: () async {
+                              Get.to(() => Pdfviewer(
+                                  pdfpath:
+                                      "resume/ $documentsnampshot['name']"));
+                              log(documentsnampshot['name']);
+                            },
+                            title: Text(documentsnampshot['id']),
+                          );
+                        }),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              }),
           ElevatedButton(
               onPressed: () async {
                 final upload = Files();
